@@ -1,6 +1,6 @@
 from rest_framework.views import APIView, Response, Request
 from django.forms.models import model_to_dict
-from exception import ImpossibleTitlesError, InvalidYearCupError, NegativeTitlesError
+from exceptions import ImpossibleTitlesError, InvalidYearCupError, NegativeTitlesError
 from teams.models import Team
 from utils import data_processing
 
@@ -13,7 +13,7 @@ class TeamView(APIView):
             data_processing(data)
             team = Team.objects.create(**data)
         except (NegativeTitlesError, InvalidYearCupError, ImpossibleTitlesError) as e:
-            return Response({"message": str(e)}, 400)
+            return Response({"error": str(e)}, 400)
         except Exception as e:
             return Response({"message": "Internal server error"}, 500)
 
@@ -57,6 +57,6 @@ class TeamDetailView(APIView):
         try:
             team = Team.objects.get(pk=team_id)
             team.delete()
-            return Response(204)
+            return Response(status=204)
         except Team.DoesNotExist:
             return Response({"message": "Team not found"}, 404)

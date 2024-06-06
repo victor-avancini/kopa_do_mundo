@@ -10,4 +10,4 @@ class InvalidYearCupError(Exception):
 
 class ImpossibleTitlesError(Exception):
     def __init__(self):
-        super().__init__("impossible to have more title than disputed cups")
+        super().__init__("impossible to have more titles than disputed cups")

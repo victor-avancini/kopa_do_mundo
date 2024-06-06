@@ -1,4 +1,4 @@
-from exception import ImpossibleTitlesError, InvalidYearCupError, NegativeTitlesError
+from exceptions import ImpossibleTitlesError, InvalidYearCupError, NegativeTitlesError
 from datetime import datetime
 
 
